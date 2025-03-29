@@ -19,10 +19,10 @@ migrate_working_dir/
 /venv/
 
 # Ignore Python virtual environment
-/fastapi-backend/venv/
+#/fastapi-backend/venv/
 
 # Ignore sensitive files
-.env
+#.env
 
 # IntelliJ related
 *.iml
