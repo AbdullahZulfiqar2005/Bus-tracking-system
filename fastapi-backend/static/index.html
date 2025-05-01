@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bus Tracker</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Firebase v8 SDKs (for your code structure) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <style>
+    #map { height: 100vh; margin: 0; padding: 0; }
+    body { margin: 0; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyAeb51GfQ_pP5Zpw_r5cfMHwMew8PXqATQ",
+      authDomain: "bus-tracking-46939.firebaseapp.com",
+      databaseURL: "https://bus-tracking-46939-default-rtdb.firebaseio.com",
+      projectId: "bus-tracking-46939",
+      storageBucket: "bus-tracking-46939.firebasestorage.app",
+      messagingSenderId: "538107836971",
+      appId: "1:538107836971:android:d599e96b16d37d6066c86e"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Setup Leaflet Map
+    var map = L.map('map').setView([31.5, 74.3], 13); // Initial center
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    var marker = L.marker([31.5, 74.3]).addTo(map);
+
+    // Listen for realtime updates
+    var locationRef = firebase.database().ref('busLocation');
+    locationRef.on('value', function(snapshot) {
+      var data = snapshot.val();
+      if (data && data.lat && data.lng) {
+        var newLatLng = [data.lat, data.lng];
+        marker.setLatLng(newLatLng);
+        map.setView(newLatLng, 15);  // Optional zoom-in on update
+      }
+    });
+  </script>
+</body>
+</html>

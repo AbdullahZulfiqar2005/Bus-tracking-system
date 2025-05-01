@@ -1,21 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter/material.dart'; //Core library for UI, designing
+import 'package:http/http.dart' as http; // To make http request to server
+import 'dart:convert'; // Convert data to JSON format
 import 'package:geolocator/geolocator.dart'; // For getting location
 
+// Main Function that runs MyApp class
 void main() {
   runApp(MyApp());
 }
 
+// Define MyApp class
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
+// Logic of app
 class _MyAppState extends State<MyApp> {
-  String message = "Location Not Sent";
+  String message = "Location Not Sent"; // INitial display on screen
 
   // Function to get the current GPS location
   Future<Position> _getLocation() async {
@@ -48,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       double longitude = position.longitude;
 
       var url = Uri.parse(
-        'http://192.168.100.76:8000/update-location/',
+        'http://192.168.100.83:8000/update-location/',
       ); // Backend API URL
       var response = await http.post(
         url,
@@ -56,16 +60,20 @@ class _MyAppState extends State<MyApp> {
         body: jsonEncode({"latitude": latitude, "longitude": longitude}),
       );
 
-      setState(() {
-        message = response.body;
-      });
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        print("Location sent successfully!");
+      } else {
+        print("Failed to send location");
+      }
     } catch (e) {
-      setState(() {
-        message = "Error: $e";
-      });
+      print("Error occurred: $e");
     }
   }
 
+  // GUI of app
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
