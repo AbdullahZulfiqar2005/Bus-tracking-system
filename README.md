@@ -1,21 +1,50 @@
+# 🚌 Real-Time Bus Tracking System
 
-# Bus-tracking-system
-A real time bus or transport tracking system.
+A complete **Bus Tracking System** designed to help users view the live location of buses on a map. The project includes a **Flutter mobile app** that sends real-time GPS data to **Firebase**, and a **React web dashboard** with **Leaflet.js** to visualize bus movement on an interactive map.
 
-# bus_tracking
+---
 
-A new Flutter project.
+## 📱 Features
 
-## Getting Started
+### 📱 Mobile App (Flutter)
 
-This project is a starting point for a Flutter application.
+- Real-time location updates using background GPS
+- Sends location to Firebase Firestore
+- Lightweight and battery-optimized
+- Flutter background services
 
-A few resources to get you started if this is your first Flutter project:
+### 🌍 Web Admin Panel (React + Leaflet.js)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Real-time map visualization of all tracked buses
+- Displays location markers and bus IDs
+- Built using React and Leaflet.js for interactive mapping
+- Admin can manage buses, routes, and status
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 🔒 Admin Login
 
+- Secure login and logout for admin
+- Basic role-based access (optional)
+
+---
+
+## 🧱 Tech Stack
+
+| Layer         | Technology           |
+|---------------|----------------------|
+| Mobile App    | Flutter              |
+| Web Dashboard | React.js, Leaflet.js |
+| Backend       | Firebase (Firestore, Auth, Realtime DB) |
+| Maps          | Leaflet.js + OpenStreetMap (or Google Maps API) |
+
+---
+
+## 🚀 Getting Started
+
+### 🔧 Prerequisites
+
+- Flutter SDK
+- Node.js & npm
+- Firebase account & project
+- Google Maps API key (optional)
+
+---
